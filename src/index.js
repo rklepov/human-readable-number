@@ -42,7 +42,9 @@ const scales = [
     "thousand",
     "million",
     "billion",
-    "trillion", // -> doesn't really work from here due to overflow
+    // the largest number that can be translated with the used technique is
+    // (2**31)*10-1 = 21474836479
+    "trillion", // -> doesn't really work due to integer overflow
     "quadrillion",
     "quintillion",
     "sextillion",
@@ -108,9 +110,12 @@ module.exports = toReadable;
 // console.log(toReadable(9991));
 // console.log(toReadable(1000111));
 // console.log(toReadable(987654321));
-// console.log(toReadable(1000000001));
 // console.log(toReadable(1000000000));
-// console.log(toReadable(4294967296));
-// console.log(toReadable(9876543210));
+// console.log(toReadable(1000000001));
+// console.log(toReadable(2 ** 32));
+// console.log(toReadable(10000000000));
+// console.log(toReadable(21474836479));
+// console.log(toReadable(2 ** 31 * 10 - 1));
+// console.log(toReadable(2 ** 31 * 10)); // <- error due to integer overflow
 
 //__EOF__
